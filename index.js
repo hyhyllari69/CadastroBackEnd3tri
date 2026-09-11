@@ -14,6 +14,17 @@ const db = require("./db")
 // npm i bcrypt
 const bcrypt = require("bcrypt")
 
+// npm i jsonwebtoken
+const jwt = require("jsonwebtoken")
+
+// npm i dotenv
+const dotenv = require("dotenv")
+dotenv.config()
+
+// npm i cors
+const cors = require("cors")
+app.use(cors())
+
 // CADASTRAR CLIENTE
 app.post("/cliente", async (req, res) => {
     try {
@@ -36,7 +47,7 @@ app.post("/cliente", async (req, res) => {
         )
 
         res.status(201).json({
-            mensagem: "Cliente cadastrado, ID = " + resultado[0].insertId
+            msg: "Cliente cadastrado, ID = " + resultado[0].insertId
         })
 
     } catch (error) {
@@ -56,11 +67,19 @@ app.post("/login", async (req,res) => {
         if(!dados_bd) {
             return res.status(401).json({msg: "Email não cadastrado!"})
         }
-        // comparar a senha: user.senha com dados_bd.senha
-        if(user.senha != dados_bd.senha) {
-            return res.status(401).json({msg: "Credenciais inválidadas!"})
+        
+        const senha_valida = await bcrypt.compare(user.senha, dados_bd.senha)
+
+        if(!senha_valida) {
+            return res.status(401).json({msg: "Credenciais inválidas!"})
+
+            const payload ={
+                id: dados_bd.id,
+                email: dados_bd.email
+            }
         }
-        return res.status(200).json({msg: "Login realizado com sucesso!"})
+        const token = jwt.sign(payload, odicess.env.JWT_SECRET, { expiresIn: '1m'})
+        return res.status(200).json({nome: dados_bd.nome, token: token})
         
     } catch (error) {
         res.status(500).json({
