@@ -61,7 +61,7 @@ app.post("/login", async (req,res) => {
     try { 
         const user = req.body
         const resultado = await db.pool.query(
-            "SELECTE email, senha FROM cliente WHERE email = ?", [user.email]
+            "SELECT id, nome, email, senha FROM cliente WHERE email = ?", [user.email]
         )
         const dados_bd = resultado[0][0]
         if(!dados_bd) {
@@ -72,13 +72,13 @@ app.post("/login", async (req,res) => {
 
         if(!senha_valida) {
             return res.status(401).json({msg: "Credenciais inválidas!"})
-
-            const payload ={
-                id: dados_bd.id,
-                email: dados_bd.email
-            }
         }
-        const token = jwt.sign(payload, odicess.env.JWT_SECRET, { expiresIn: '1m'})
+        const payload ={
+            id: dados_bd.id,
+            email: dados_bd.email
+        }
+        
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '2m'})
         return res.status(200).json({nome: dados_bd.nome, token: token})
         
     } catch (error) {
@@ -107,23 +107,26 @@ app.get("/cliente", async (req, res) => {
 })
 
 // CONSULTAR UM CLIENTE ESPECÍFICO
-app.get("/cliente/:id", async (req, res) => {
+app.get("/cliente/perfil", autenticar, async (req, res) => {
     try {
 
-        const id = req.params.id
+        const id = req.usuario.id
 
         const resultado = await db.pool.query(
             "SELECT * FROM cliente WHERE id = ?",
             [id]
-        )
-
+        );
+    
         if (resultado[0].length === 0) {
             return res.status(404).json({
                 mensagem: "Cliente não encontrado"
             })
         }
+        
+        const perfil = resultado[0][0]
+        // delete perfil.senha
 
-        res.status(200).json(resultado[0][0])
+        res.status(200).json(perfil)
 
     } catch (error) {
         res.status(500).json({
@@ -203,6 +206,20 @@ app.delete("/cliente/:id", async (req, res) => {
         })
     }
 })
+
+// https//:dontpad.com/backendapi
+function autenticar(req, res, next){
+    const authHeader = req.headers['authorization']
+    const token = authHeader && authHeader.split(' ')[1]
+    if (token == null){
+        return res.status(401).json({erro: "Token não enviado, usar Authorization Bearer <token>"})
+    }
+    jwt.verify(token, process.env.JWT_SECRET, (err, usuario) => {
+        if (err) return res.status(403).json({erro: "Token inválido"})
+        req.usuario = usuario
+        next()
+    })   
+}
 
 // INICIAR API
 app.listen(port, () => {
