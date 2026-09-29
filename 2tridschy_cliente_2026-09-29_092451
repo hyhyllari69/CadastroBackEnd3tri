@@ -1,0 +1,55 @@
+-- MySQL dump 10.13  Distrib 8.0.33, for Linux (x86_64)
+--
+-- Host: 127.0.0.1    Database: 2tridschy
+-- ------------------------------------------------------
+-- Server version	8.0.33-0ubuntu0.20.04.2
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `cliente`
+--
+
+DROP TABLE IF EXISTS `cliente`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cliente` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(50) NOT NULL,
+  `cpf` char(14) NOT NULL,
+  `celular` char(14) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `senha` varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cpf` (`cpf`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cliente`
+--
+
+/*!40000 ALTER TABLE `cliente` DISABLE KEYS */;
+INSERT INTO `cliente` VALUES (2,'Isadora','111.222.333-44','(41)98888-1111','isadora.silva@email.com','isadora123'),(3,'João','222.333.444-55','(42)97777-2222','joao.santos@email.com','joao456'),(4,'Mariana','333.444.555-66','(43)96666-3333','mariana.oliveira@email.com','$2b$10$dl68TJDYI9QGfygH.zSP7uuDo.YkQAabrBlmbW4LY3ZrdfpKqRXZ.'),(5,'Lucas','444.555.666-77','(44)95555-4444','lucas.almeida@email.com','lucas321'),(6,'Ana','555.666.777-88','(45)94444-5555','ana.costa@email.com','ana987'),(7,'Pedro','777.888.999-00','(46)93333-6666','pedro.rocha@email.com','pedro654'),(8,'Beatriz','888.999.000-11','(47)92222-7777','beatriz.martins@email.com','bia2026'),(9,'Gabriel','999.000.111-22','(48)91111-8888','gabriel.lima@email.com','gabriel111'),(10,'Larissa','123.456.789-10','(49)90000-9999','larissa.souza@email.com','larissa555'),(12,'Ianzeen','11.322.322-44','(43)98888-1111','ianzeen.isadora@email.com','$2b$10$Mo.W9JRtsCskWxse/pNWuuM0q8IGwyNyFw/usAQ3rT/OEK7KZnDda');
+/*!40000 ALTER TABLE `cliente` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-09-29  9:24:53
