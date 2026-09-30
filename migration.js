@@ -15,9 +15,13 @@ async function criar_estrutura(){
             UNIQUE KEY cpf cpf),
             UNIQUE KEY email (email)
           ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+          INSERT INTO cliente VALUES
+          (12,'Ianzeen','11.322.322-44','(43)98888-1111','ianzeen.isadora@email.com','$2b$10$Mo.W9JRtsCskWxse/pNWuuM0q8IGwyNyFw/usAQ3rT/OEK7KZnDda');
         `)
-
+        console.log("Estrutura e dados da tabela 'cliente' criado com sucesso!")
+        process.exit(0);
     } catch (error) {
         console.log(error)
     }
 }
+criar_tabelas()

@@ -8,7 +8,8 @@ const pool = mysql.createPool({
    port: 3306,
    user: 'root',
    password: 'escola',
-   database: 'teste2tridschy'
+   database: 'teste2tridschy',
+   multipleStatements: true
 })
 
 
