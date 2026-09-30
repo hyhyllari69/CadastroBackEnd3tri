@@ -1,6 +1,6 @@
 const db = require("./db")
 
-async function criar_estrutura(){
+async function criar_tabelas(){
     try {
         await db.pool.query(`
         DROP TABLE IF EXISTS cliente;
@@ -12,7 +12,7 @@ async function criar_estrutura(){
             email varchar(50) NOT NULL,
             senha varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
             PRIMARY KEY (id),
-            UNIQUE KEY cpf cpf),
+            UNIQUE KEY cpf (cpf),
             UNIQUE KEY email (email)
           ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
           INSERT INTO cliente VALUES
