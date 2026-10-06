@@ -1,2 +1,8 @@
-Criar aquivo.env
+criar arquivo.env
+API_PORT=3000
+DB_HOST=127.0.0.1
+DB_PORT=3306
+USER=root
+DB_PASSWORD=escola #Corrigir a senha de acordo com o lab
+DB_DATABASE=teste2tridschy
 JWT_SECRET=vaitomandodasenhadasbbsecreta
