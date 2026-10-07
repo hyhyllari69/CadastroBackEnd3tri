@@ -1,7 +1,7 @@
-// npm init
-// npm i mysql2
+// npm i
+// para executar a API npm start
 const mysql = require("mysql2/promise")
-require("dotenv").config
+require("dotenv").config()
 
 const pool = mysql.createPool({
    host: process.env.DB_HOST,
