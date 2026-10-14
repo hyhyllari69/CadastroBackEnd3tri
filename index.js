@@ -208,6 +208,54 @@ app.delete("/cliente/:id", async (req, res) => {
     }
 })
 
+// Retorna todos os produtos
+app.get("/produto", async (req, res) => {
+    try {
+        const [produtos] = await db.pool.query(
+            "SELECT * FROM produto ORDER BY id"
+        );
+
+        res.status(200).json(produtos);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            erro: "Erro ao buscar produtos"
+        });
+    }
+});
+
+// Retorna um produto pelo ID
+app.get("/produto/:id", async (req, res) => {
+    try {
+        const id = Number(req.params.id);
+
+        if (!Number.isInteger(id) || id <= 0) {
+            return res.status(400).json({
+                erro: "ID inválido"
+            });
+        }
+
+        const [produtos] = await db.pool.query(
+            "SELECT * FROM produto WHERE id = ?",
+            [id]
+        );
+
+        if (produtos.length === 0) {
+            return res.status(404).json({
+                erro: "Produto não encontrado"
+            });
+        }
+
+        res.status(200).json(produtos[0]);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            erro: "Erro ao buscar produto"
+        });
+    }
+});
+
+
 // https//:dontpad.com/backendapi
 function autenticar(req, res, next){
     const authHeader = req.headers['authorization']

@@ -74,6 +74,40 @@ CREATE TABLE produto
     quantidade_img INT NOT NULL
 );
 
+INSERT INTO produto
+(nome, descricao, categoria, preco, caminho_img, quantidade_img)
+VALUES
+('Moletom Gatinho Lunar', 'Moletom preto com estampa de gatinho e lua rosa.', 'Roupas', 189.90, 'img/moletom.png', 15),
+('Cropped Moonie', 'Cropped rosa com logo Moonie.', 'Roupas', 69.90, 'img/cropped.png', 20),
+('Camiseta Caos Fofo', 'Camiseta preta com estampa alternativa.', 'Roupas', 79.90, 'img/camiseta.png', 25),
+('Saia Dark Pink', 'Saia preta com detalhes rosa.', 'Roupas', 99.90, 'img/saia.png', 10),
+('Meias Gatinho', 'Meias pretas com desenhos de gatinhos.', 'Acessórios', 29.90, 'img/meias.png', 30),
+('Casaco Lua Rosa', 'Casaco escuro com detalhes em rosa pastel.', 'Roupas', 159.90, 'img/casaco.png', 12),
+('Boné Moonie', 'Boné preto com logo bordado.', 'Acessórios', 49.90, 'img/bone.png', 18),
+('Mochila Noturna', 'Mochila preta com detalhes góticos.', 'Bolsas', 139.90, 'img/mochila.png', 8),
+('Bolsa Lua', 'Bolsa pequena com detalhe de lua rosa.', 'Bolsas', 89.90, 'img/bolsa.png', 14),
+('Colar Pentagrama', 'Colar alternativo com pingente de estrela.', 'Joias', 39.90, 'img/colar.png', 25),
+('Pulseira Pink', 'Pulseira preta e rosa.', 'Joias', 24.90, 'img/pulseira.png', 30),
+('Anel Estelar', 'Anel com desenho de estrela.', 'Joias', 34.90, 'img/anel.png', 20),
+('Brincos Lua', 'Brincos pequenos em formato de lua.', 'Joias', 29.90, 'img/brincos.png', 16),
+('Caneca Moonie', 'Caneca preta com ilustração da marca.', 'Decoração', 44.90, 'img/caneca.png', 20),
+('Chaveiro Gatinho', 'Chaveiro de gatinho preto e rosa.', 'Acessórios', 19.90, 'img/chaveiro.png', 40),
+('Adesivos Místicos', 'Cartela de adesivos de luas e estrelas.', 'Papelaria', 14.90, 'img/adesivos.png', 50),
+('Caderno Lunar', 'Caderno com capa temática Moonie.', 'Papelaria', 32.90, 'img/caderno.png', 25),
+('Estojo Dark', 'Estojo preto com zíper rosa.', 'Papelaria', 27.90, 'img/estojo.png', 18),
+('Garrafa Estelar', 'Garrafa reutilizável com estampa lunar.', 'Acessórios', 54.90, 'img/garrafa.png', 12),
+('Almofada Gatinho', 'Almofada decorativa de gatinho.', 'Decoração', 64.90, 'img/almofada.png', 10),
+('Pelúcia Moonie', 'Pelúcia de gatinho preto com olhos rosa.', 'Decoração', 79.90, 'img/pelucia.png', 15),
+('Luminária Lua', 'Luminária decorativa em formato de lua.', 'Decoração', 99.90, 'img/luminaria.png', 8),
+('Presilha Estrela', 'Presilha de cabelo com estrela rosa.', 'Acessórios', 16.90, 'img/presilha.png', 35),
+('Tiara Gatinho', 'Tiara preta com orelhas de gatinho.', 'Acessórios', 34.90, 'img/tiara.png', 12),
+('Carteira Dark', 'Carteira preta com detalhes em rosa.', 'Bolsas', 59.90, 'img/carteira.png', 10),
+('Tênis Lunar', 'Tênis casual preto com detalhes rosa.', 'Calçados', 219.90, 'img/tenis.png', 6),
+('Pantufa Gatinho', 'Pantufa macia com tema de gatinho.', 'Calçados', 69.90, 'img/pantufa.png', 14),
+('Shorts Moonie', 'Shorts preto com detalhes rosa.', 'Roupas', 74.90, 'img/shorts.png', 18),
+('Jaqueta Estelar', 'Jaqueta preta com estampa de estrelas.', 'Roupas', 199.90, 'img/jaqueta.png', 7),
+('Kit Místico', 'Kit com adesivos, chaveiro e pulseira.', 'Kits', 49.90, 'img/kit.png', 20);
+
 -- TABELA COMPRA
 
 CREATE TABLE compra
