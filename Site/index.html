@@ -44,9 +44,23 @@
             </div>
         </nav>
     </header>
-    <main class="d-flex justify-content-center align-items-center">
-        <h1>Produtos deveriam aparecer aqui!</h1>
+    <main>
+        <section>
+            <h1>Estoque de Produtos</h1>
+            <p>Confira os produtos cadastrados na Moonie.</p>
+    
+            <input
+                type="search"
+                id="pesquisa"
+                placeholder="Pesquisar produtos..."
+            >
+    
+            <div class="lista-estoque" id="lista-produtos">
+                <!-- Os produtos serão carregados do banco pela API -->
+            </div>
+        </section>
     </main>
+
     <!-- ALERTA TOAST -->
     <div class="position-fixed" style="top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1050;">
         <div id="liveToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">

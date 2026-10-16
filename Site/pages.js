@@ -35,4 +35,88 @@ function logout() {
     window.location.href = "login.html"
 }
 
+const API_URL = "http://localhost:3000/produto";
+
+const lista = document.getElementById("lista-produtos");
+const pesquisa = document.getElementById("pesquisa");
+
+let produtos = [];
+
+async function carregarProdutos() {
+    try {
+        const resposta = await fetch(API_URL);
+
+        if (!resposta.ok) {
+            throw new Error("Erro ao consultar produtos");
+        }
+
+        produtos = await resposta.json();
+        mostrarProdutos(produtos);
+
+    } catch (erro) {
+        console.error(erro);
+        lista.textContent =
+            "Não foi possível carregar os produtos do estoque.";
+    }
+}
+
+function mostrarProdutos(listaProdutos) {
+    lista.replaceChildren();
+
+    if (listaProdutos.length === 0) {
+        lista.textContent = "Nenhum produto encontrado.";
+        return;
+    }
+
+    listaProdutos.forEach(produto => {
+        const card = document.createElement("article");
+        card.className = "produto-estoque";
+
+        const imagem = document.createElement("img");
+        imagem.src = produto.caminho_img;
+        imagem.alt = produto.nome;
+
+        imagem.onerror = () => {
+            imagem.alt = "Imagem indisponível";
+            imagem.removeAttribute("src");
+        };
+
+        const nome = document.createElement("h2");
+        nome.textContent = produto.nome;
+
+        const categoria = document.createElement("p");
+        categoria.textContent = "Categoria: " + produto.categoria;
+
+        const descricao = document.createElement("p");
+        descricao.textContent = produto.descricao;
+
+        const preco = document.createElement("p");
+        preco.className = "preco";
+        preco.textContent = Number(produto.preco).toLocaleString(
+            "pt-BR",
+            { style: "currency", currency: "BRL" }
+        );
+
+        const quantidade = document.createElement("p");
+        quantidade.className = "quantidade";
+        quantidade.textContent =
+            "Estoque: " + produto.quantidade + " unidades";
+
+        card.append(imagem, nome, categoria, descricao, preco, quantidade);
+        lista.appendChild(card);
+    });
+}
+
+pesquisa.addEventListener("input", () => {
+    const termo = pesquisa.value.toLowerCase();
+
+    mostrarProdutos(
+        produtos.filter(produto =>
+            produto.nome.toLowerCase().includes(termo)
+        )
+    );
+});
+
+carregarProdutos();
+
 window.addEventListener("DOMContentLoaded", atualizar_navbar)
