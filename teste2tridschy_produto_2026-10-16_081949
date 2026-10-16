@@ -1,0 +1,54 @@
+-- MySQL dump 10.13  Distrib 8.0.33, for Linux (x86_64)
+--
+-- Host: 127.0.0.1    Database: teste2tridschy
+-- ------------------------------------------------------
+-- Server version	8.0.33-0ubuntu0.20.04.2
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `produto`
+--
+
+DROP TABLE IF EXISTS `produto`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `produto` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `descricao` varchar(255) NOT NULL,
+  `categoria` varchar(50) NOT NULL,
+  `preco` decimal(10,2) NOT NULL,
+  `caminho_img` varchar(255) DEFAULT NULL,
+  `quantidade_img` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `produto`
+--
+
+/*!40000 ALTER TABLE `produto` DISABLE KEYS */;
+INSERT INTO `produto` VALUES (1,'Moletom Gatinho Lunar','Moletom preto com estampa de gatinho e lua rosa.','Roupas',189.90,'img/moletom.png',15),(2,'Cropped Moonie','Cropped rosa com logo Moonie.','Roupas',69.90,'img/cropped.png',20),(3,'Camiseta Caos Fofo','Camiseta preta com estampa alternativa.','Roupas',79.90,'img/camiseta.png',25),(4,'Saia Dark Pink','Saia preta com detalhes rosa.','Roupas',99.90,'img/saia.png',10),(5,'Meias Gatinho','Meias pretas com desenhos de gatinhos.','Acessórios',29.90,'img/meias.png',30),(6,'Casaco Lua Rosa','Casaco escuro com detalhes em rosa pastel.','Roupas',159.90,'img/casaco.png',12),(7,'Boné Moonie','Boné preto com logo bordado.','Acessórios',49.90,'img/bone.png',18),(8,'Mochila Noturna','Mochila preta com detalhes góticos.','Bolsas',139.90,'img/mochila.png',8),(9,'Bolsa Lua','Bolsa pequena com detalhe de lua rosa.','Bolsas',89.90,'img/bolsa.png',14),(10,'Colar Pentagrama','Colar alternativo com pingente de estrela.','Joias',39.90,'img/colar.png',25),(11,'Pulseira Pink','Pulseira preta e rosa.','Joias',24.90,'img/pulseira.png',30),(12,'Anel Estelar','Anel com desenho de estrela.','Joias',34.90,'img/anel.png',20),(13,'Brincos Lua','Brincos pequenos em formato de lua.','Joias',29.90,'img/brincos.png',16),(14,'Caneca Moonie','Caneca preta com ilustração da marca.','Decoração',44.90,'img/caneca.png',20),(15,'Chaveiro Gatinho','Chaveiro de gatinho preto e rosa.','Acessórios',19.90,'img/chaveiro.png',40),(16,'Adesivos Místicos','Cartela de adesivos de luas e estrelas.','Papelaria',14.90,'img/adesivos.png',50),(17,'Caderno Lunar','Caderno com capa temática Moonie.','Papelaria',32.90,'img/caderno.png',25),(18,'Estojo Dark','Estojo preto com zíper rosa.','Papelaria',27.90,'img/estojo.png',18),(19,'Garrafa Estelar','Garrafa reutilizável com estampa lunar.','Acessórios',54.90,'img/garrafa.png',12),(20,'Almofada Gatinho','Almofada decorativa de gatinho.','Decoração',64.90,'img/almofada.png',10),(21,'Pelúcia Moonie','Pelúcia de gatinho preto com olhos rosa.','Decoração',79.90,'img/pelucia.png',15),(22,'Luminária Lua','Luminária decorativa em formato de lua.','Decoração',99.90,'img/luminaria.png',8),(23,'Presilha Estrela','Presilha de cabelo com estrela rosa.','Acessórios',16.90,'img/presilha.png',35),(24,'Tiara Gatinho','Tiara preta com orelhas de gatinho.','Acessórios',34.90,'img/tiara.png',12),(25,'Carteira Dark','Carteira preta com detalhes em rosa.','Bolsas',59.90,'img/carteira.png',10),(26,'Tênis Lunar','Tênis casual preto com detalhes rosa.','Calçados',219.90,'img/tenis.png',6),(27,'Pantufa Gatinho','Pantufa macia com tema de gatinho.','Calçados',69.90,'img/pantufa.png',14),(28,'Shorts Moonie','Shorts preto com detalhes rosa.','Roupas',74.90,'img/shorts.png',18),(29,'Jaqueta Estelar','Jaqueta preta com estampa de estrelas.','Roupas',199.90,'img/jaqueta.png',7),(30,'Kit Místico','Kit com adesivos, chaveiro e pulseira.','Kits',49.90,'img/kit.png',20);
+/*!40000 ALTER TABLE `produto` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-10-16  8:19:52
