@@ -208,53 +208,40 @@ app.delete("/cliente/:id", async (req, res) => {
     }
 })
 
-// Retorna todos os produtos
+
 app.get("/produto", async (req, res) => {
     try {
-        const [produtos] = await db.pool.query(
-            "SELECT * FROM produto ORDER BY id"
-        );
-
-        res.status(200).json(produtos);
+        // Query Parameter
+        const { busca }     = req.query
+        let resultado
+        if (busca) {
+            resultado = await db.pool.query ("SELECT * FROM produto WHERE nome LIKE ?", ["%" + busca + "%"])
+        }    else {
+            resultado = await db.pool.query("SELECT * FROM produto")
+        }
+        res.status(200).json(resultado[0])
     } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            erro: "Erro ao buscar produtos"
-        });
+        res.status(500).json({erro: error.message})
     }
-});
+})
 
-// Retorna um produto pelo ID
 app.get("/produto/:id", async (req, res) => {
     try {
-        const id = Number(req.params.id);
-
-        if (!Number.isInteger(id) || id <= 0) {
-            return res.status(400).json({
-                erro: "ID inválido"
-            });
-        }
-
-        const [produtos] = await db.pool.query(
-            "SELECT * FROM produto WHERE id = ?",
-            [id]
-        );
-
-        if (produtos.length === 0) {
-            return res.status(404).json({
-                erro: "Produto não encontrado"
-            });
-        }
-
-        res.status(200).json(produtos[0]);
+        const id = req.params.id
+        const resultado = await db.pool.query("SELECT * FROM produto WHERE id = ?", [id])
+        const produto = resultado[0][0]
+        res.status(200).json(produto)
     } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            erro: "Erro ao buscar produto"
-        });
+        res.status(500).json({erro: error.message})
     }
-});
+})
 
+
+
+
+app.listen(port, () => {
+    console.log("API rodando na porta " + port)
+})
 
 // https//:dontpad.com/backendapi
 function autenticar(req, res, next){
@@ -269,8 +256,3 @@ function autenticar(req, res, next){
         next()
     })   
 }
-
-// INICIAR API
-app.listen(port, () => {
-    console.log("API rodando na porta " + port)
-})
