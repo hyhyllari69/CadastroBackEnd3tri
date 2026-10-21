@@ -208,17 +208,25 @@ app.delete("/cliente/:id", async (req, res) => {
     }
 })
 
-
 app.get("/produto", async (req, res) => {
     try {
+        let sql = "SELECT * FROM produto WHERE 1=1"
+        const params = []
         // Query Parameter
-        const { busca }     = req.query
+        const { busca, ordenacao } = req.query
         let resultado
         if (busca) {
-            resultado = await db.pool.query ("SELECT * FROM produto WHERE nome LIKE ?", ["%" + busca + "%"])
-        }    else {
-            resultado = await db.pool.query("SELECT * FROM produto")
+            sql += " AND nome LIKE ?"
+            params.push(`%${busca}%`)
+        } 
+        if (ordenacao) {
+            if (ordenacao == "maior preco") {
+                sql += " ORDER BY preco DESC"
+            } else {
+                sql += " ORDER BY preco ASC"
+            }
         }
+        resultado = await db.pool.query(sql, params)
         res.status(200).json(resultado[0])
     } catch (error) {
         res.status(500).json({erro: error.message})
@@ -227,6 +235,7 @@ app.get("/produto", async (req, res) => {
 
 app.get("/produto/:id", async (req, res) => {
     try {
+        // Path Parameter
         const id = req.params.id
         const resultado = await db.pool.query("SELECT * FROM produto WHERE id = ?", [id])
         const produto = resultado[0][0]
@@ -235,9 +244,6 @@ app.get("/produto/:id", async (req, res) => {
         res.status(500).json({erro: error.message})
     }
 })
-
-
-
 
 app.listen(port, () => {
     console.log("API rodando na porta " + port)
