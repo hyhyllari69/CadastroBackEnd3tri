@@ -208,25 +208,70 @@ app.delete("/cliente/:id", async (req, res) => {
     }
 })
 
+// CONSULTAR PRODUTOS (busca, filtros, ordenação e paginação)
 app.get("/produto", async (req, res) => {
     try {
         let sql = "SELECT * FROM produto WHERE 1=1"
         const params = []
-        // Query Parameter
-        const { busca, ordenacao } = req.query
-        let resultado
+
+        // Query Parameters
+        const {
+            busca,
+            ordenacao,
+            categoria,
+            preco_min,
+            preco_max,
+            pagina
+        } = req.query
+
+        // Filtro de busca por nome
         if (busca) {
             sql += " AND nome LIKE ?"
             params.push(`%${busca}%`)
-        } 
+        }
+
+        // Filtro por categoria
+        if (categoria) {
+            sql += " AND categoria = ?"
+            params.push(categoria)
+        }
+
+        // Filtro por preço mínimo
+        if (preco_min) {
+            sql += " AND preco >= ?"
+            params.push(preco_min)
+        }
+
+        // Filtro por preço máximo
+        if (preco_max) {
+            sql += " AND preco <= ?"
+            params.push(preco_max)
+        }
+
+        // Ordenação por menor ou maior preço
+        let orderBy = " ORDER BY id ASC"
         if (ordenacao) {
-            if (ordenacao == "maior preco") {
-                sql += " ORDER BY preco DESC"
-            } else {
-                sql += " ORDER BY preco ASC"
+            const ordem = String(ordenacao).toLowerCase()
+            if (ordem === "maior preco" || ordem === "maior_preco" || ordem === "desc") {
+                orderBy = " ORDER BY preco DESC"
+            } else if (ordem === "menor preco" || ordem === "menor_preco" || ordem === "asc") {
+                orderBy = " ORDER BY preco ASC"
             }
         }
-        resultado = await db.pool.query(sql, params)
+        sql += orderBy
+
+        // Paginação: quantidade fixa de 10 produtos por página
+        const limite = 10
+        let paginaAtual = parseInt(pagina)
+        if (isNaN(paginaAtual) || paginaAtual < 1) {
+            paginaAtual = 1
+        }
+        const offset = (paginaAtual - 1) * limite
+
+        sql += " LIMIT ? OFFSET ?"
+        params.push(limite, offset)
+
+        const resultado = await db.pool.query(sql, params)
         res.status(200).json(resultado[0])
     } catch (error) {
         res.status(500).json({erro: error.message})
