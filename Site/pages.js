@@ -107,16 +107,20 @@ function mostrarProdutos(listaProdutos) {
     });
 }
 
-pesquisa.addEventListener("input", () => {
-    const termo = pesquisa.value.toLowerCase();
+// Só ativa o carregamento/filtro automático na página inicial (index.html),
+// pois a página de produtos (produtos.html) usa o produtos.js com a própria lógica
+if (lista && pesquisa) {
+    pesquisa.addEventListener("input", () => {
+        const termo = pesquisa.value.toLowerCase();
 
-    mostrarProdutos(
-        produtos.filter(produto =>
-            produto.nome.toLowerCase().includes(termo)
-        )
-    );
-});
+        mostrarProdutos(
+            produtos.filter(produto =>
+                produto.nome.toLowerCase().includes(termo)
+            )
+        );
+    });
 
-carregarProdutos();
+    carregarProdutos();
+}
 
 window.addEventListener("DOMContentLoaded", atualizar_navbar)
